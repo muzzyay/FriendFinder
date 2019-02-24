@@ -18,18 +18,6 @@ app.use(express.json());
 apiRoutes(app, friends);
 htmlRoutes(app);
 
-// var totalDifference = 0;
-
-// for (var i = 0; i < user1.length; i++) {
-
-//     var num1 = user1[i];
-//     var num2 = user2[i];
-
-//     var singleDifference = Math.abs(num1 - num2);
-//     console.log(singleDifference);
-//     totalDifference = singleDifference + totalDifference
-// }
-
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function () {
