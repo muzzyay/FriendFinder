@@ -1,93 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/jquery"></script>
-    <script src="https://surveyjs.azureedge.net/1.0.71/survey.jquery.js"></script>
-    <link href="https://surveyjs.azureedge.net/1.0.71/survey.css" type="text/css" rel="stylesheet" />
-    <link rel="stylesheet" href="./index.css">
+    <title>Survey</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+
 <body>
+
+    <div class="modal" tabindex="-1" role="dialog" id="validate">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Warning!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Please answer all questions.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="friendmatch">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Found a match!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="friendmatch-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
-        <div class="jumbotron text-center">
-            <h1 class="display-4">Friend Finder</h1>
-            <p class="lead">Welcome to the Friend Finder Survey</p>
-            <hr class="my-4">
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <strong>
-                    Survey Form</strong>
-            </div>
-            <div class="card-body">
-                <!-- Here we create an HTML Form for handling the inputs-->
-                <form role="form">
-                    <!--User enters name  -->
-                    <div class="form-group" id="form-name">
-                        <label for="name">Full Name</label>
-                        <input type="text" class="form-control" id="name">
+        <div class="row">
+            <div class="col">
+                <h1>Survey Questions</h1>
+                <hr>
+                <h2><strong>About You</strong></h2>
+                <form>
+                    <div class="form-group">
+                        <label for="form-name">Name (Required)</label>
+                        <input type="text" class="form-control" id="form-name" placeholder="Enter your name" required>
                     </div>
-                    <h6 class="text-danger" id="name-warning"></h6>
-                    <!-- User enters image here -->
-                    <form action="/action_page.php">
-                        <input type="file" name="pic" accept="image/*">
-                        <input type="submit">
-                    </form>
-                    <h6 class="text-danger" id="size-warning"></h6>
+                    <div class="form-group">
+                        <label for="form-image">Link to Photo Image (Required)</label>
+                        <input type="text" class="form-control" id="form-image" placeholder="Enter a link to your image"
+                            required>
+                    </div>
                 </form>
+                <hr>
+                <form>
+                    <div class="form-group">
+                        <h3><strong>Question 1</strong></h3>
+                        <label for="q1">
+                            <h5 class="font-weight-normal">Your mind is always buzzing with unexplored ideas and plans.
+                            </h5>
+                        </label>
+                        <select class="form-control col-2" id="q1">
+                            <option selected disabled>Select an option</option>
+                            <option value="1">1 <span> (Strongly Disagree)</span></option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option value="5">5<span> (Strongly Agree)</span></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h3><strong>Question 2</strong></h3>
+                        <label for="q2">
+                            <h5 class="font-weight-normal">Generally speaking, you rely more on your experience than
+                                your imagination.</h5>
+                        </label>
+                        <select class="form-control col-2" id="q2">
+                            <option selected disabled>Select an option</option>
+                            <option value="1">1 <span> (Strongly Disagree)</span></option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option value="5">5<span> (Strongly Agree)</span></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h3><strong>Question 3</strong></h3>
+                        <label for="q3">
+                            <h5 class="font-weight-normal">You find it easy to stay relaxed and focused even when there
+                                is some pressure.</h5>
+                        </label>
+                        <select class="form-control col-2" id="q3">
+                            <option selected disabled>Select an option</option>
+                            <option value="1">1 <span> (Strongly Disagree)</span></option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option value="5">5<span> (Strongly Agree)</span></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h3><strong>Question 4</strong></h3>
+                        <label for="q4">
+                            <h5 class="font-weight-normal">You rarely do something just out of sheer curiosity.</h5>
+                        </label>
+                        <select class="form-control col-2" id="q4">
+                            <option selected disabled>Select an option</option>
+                            <option value="1">1 <span> (Strongly Disagree)</span></option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option value="5">5<span> (Strongly Agree)</span></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h3><strong>Question 5</strong></h3>
+                        <label for="q5">
+                            <h5 class="font-weight-normal">People can rarely upset you.</h5>
+                        </label>
+                        <select class="form-control col-2" id="q5">
+                            <option selected disabled>Select an option</option>
+                            <option value="1">1 <span> (Strongly Disagree)</span></option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option value="5">5<span> (Strongly Agree)</span></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h3><strong>Question 6</strong></h3>
+                        <label for="q6">
+                            <h5 class="font-weight-normal">It is often difficult for you to relate to other people’s
+                                feelings.</h5>
+                        </label>
+                        <select class="form-control col-2" id="q6">
+                            <option selected disabled>Select an option</option>
+                            <option value="1">1 <span> (Strongly Disagree)</span></option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option value="5">5<span> (Strongly Agree)</span></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h3><strong>Question 7</strong></h3>
+                        <label for="q7">
+                            <h5 class="font-weight-normal">In a discussion, truth should be more important than people’s
+                                sensitivities.</h5>
+                        </label>
+                        <select class="form-control col-2" id="q7">
+                            <option selected disabled>Select an option</option>
+                            <option value="1">1 <span> (Strongly Disagree)</span></option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option value="5">5<span> (Strongly Agree)</span></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h3><strong>Question 8</strong></h3>
+                        <label for="q8">
+                            <h5 class="font-weight-normal">You rarely get carried away by fantasies and ideas.</h5>
+                        </label>
+                        <select class="form-control col-2" id="q8">
+                            <option selected disabled>Select an option</option>
+                            <option value="1">1 <span> (Strongly Disagree)</span></option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option value="5">5<span> (Strongly Agree)</span></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h3><strong>Question 9</strong></h3>
+                        <label for="q9">
+                            <h5 class="font-weight-normal">You think that everyone’s views should be respected
+                                regardless of whether they are supported by facts or not.</h5>
+                        </label>
+                        <select class="form-control col-2" id="q9">
+                            <option selected disabled>Select an option</option>
+                            <option value="1">1 <span> (Strongly Disagree)</span></option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option value="5">5<span> (Strongly Agree)</span></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <h3><strong>Question 10</strong></h3>
+                        <label for="q10">
+                            <h5 class="font-weight-normal">You feel more energetic after spending time with a group of
+                                people.</h5>
+                        </label>
+                        <select class="form-control col-2" id="q10">
+                            <option selected disabled>Select an option</option>
+                            <option value="1">1 <span> (Strongly Disagree)</span></option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option value="5">5<span> (Strongly Agree)</span></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary col-12" id="submit-btn">Submit</button>
+                </form>
+                <br>
             </div>
         </div>
-    
-    
-    <div id="surveyElement"></div>
-    <div id="surveyResult"></div>
+
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
     <script>
-        var json = {
-            questions: [
-                {
-                    type: "rating",
-                    name: "satisfaction",
-                    title: "How satisfied are you with the Product?",
-                    minRateDescription: "Not Satisfied",
-                    maxRateDescription: "Completely satisfied"
-                }
-            ]
-        };
-        window.survey = new Survey.Model(json);
-        survey
-            .onComplete
-            .add(function (result) {
-                document
-                    .querySelector('#surveyResult')
-                    .innerHTML = "result: " + JSON.stringify(result.data);
-            });
-        $("#surveyElement").Survey({ model: survey });
-    </script>
-    <!-- <script type="text/javascript">
-        // This code takes the user input and reserves a table if available or puts the user on the waitlist.
-        $("#submit-button").on("click", function (event) {
+
+        $("#submit-btn").on("click", function (event) {
             event.preventDefault();
-            var newReservation = {
-                name: $("#guest-name").val().trim(),
-                guests: $("#group-size").val().trim(),
-                email: $("#guest-email").val().trim(),
-                special: $("#guest-message").val().trim()
-            };
-            $.post("/api/reservation", newReservation)
-                .then(function (data) {
-                    console.log("form.html", data);
-                    alert("Requesting Reservation");
-                });
+
+            if (parseInt($("#q1").val()) === NaN || parseInt($("#q2").val()) === NaN || parseInt($("#q3").val()) === NaN || parseInt($("#q4").val()) === NaN || parseInt($("#q5").val()) === NaN || parseInt($("#q6").val()) === NaN || parseInt($("#q7").val()) === NaN || parseInt($("#q8").val()) === NaN || parseInt($("#q9").val()) === NaN || parseInt($("#q10").val()) === NaN || $("#form-name").val().trim().length < 3 || $("#form-image").val().trim().length < 5) {
+                // alert("Please make sure you answered all questions.");
+
+                $('#validate').modal();
+            } else {
+
+                var newFriend = {
+                    name: $("#form-name").val().trim(),
+                    photo: $("#form-image").val().trim(),
+                    scores: []
+
+                }
+                // Number($("#q1").val()), Number($("#q2").val()), Number($("#q3").val()), Number($("#q4").val()), Number($("#q5").val()), Number($("#q6").val()), Number($("#q7").val()), Number($("#q8").val()), Number($("#q9").val()), Number($("#q10").val())
+
+                for(var i=1; i<11; i++){
+                    newFriend.scores.push(parseInt($("#q"+i).val()));
+                }
+                console.log(newFriend);
+
+                $("#form-name").val("");
+                $("#form-image").val("");
+                $("#q1").val("Select an option");
+                $("#q2").val("Select an option");
+                $("#q3").val("Select an option");
+                $("#q4").val("Select an option");
+                $("#q5").val("Select an option");
+                $("#q6").val("Select an option");
+                $("#q7").val("Select an option");
+                $("#q8").val("Select an option");
+                $("#q9").val("Select an option");
+                $("#q10").val("Select an option");
+
+
+                $.post("/api/friends", newFriend)
+                    .then(function (data) {
+                        $("#friendmatch-body").empty();
+                        var img = $("<img>");
+                        img.attr("src", data.photo);
+                        img.attr("alt", data.name);
+                        $("#friendmatch-body").append(img);
+                        $("#friendmatch-body").append("<h3>" + data.name + "</h3>");
+                        $('#friendmatch').modal();
+
+
+                    });
+            }
+
+
         });
-    </script> -->
-</div>
-</div>
+
+
+
+    </script>
 </body>
+
 </html>
