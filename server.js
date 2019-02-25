@@ -6,6 +6,7 @@ const path = require("path");
 const friends = require("./app/data/friends");
 const apiRoutes = require("./app/routing/apiRoutes");
 const htmlRoutes = require("./app/routing/htmlRoutes");
+const http = require("http");
 // Sets up the Express App
 // =============================================================
 var app = express();
@@ -23,3 +24,7 @@ htmlRoutes(app);
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
 });
+
+setInterval(function() {
+    http.get("http://frozen-gorge-25057.herokuapp.com");
+}, 1800000);
