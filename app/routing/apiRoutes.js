@@ -13,7 +13,7 @@ module.exports = function (app, friends) {
         var theMatch;
         var leastDifference = 40;
 
-        console.log(newFriend);
+        
 
         friends.forEach(element => {
             var totalDifference = 0;
@@ -28,7 +28,7 @@ module.exports = function (app, friends) {
                 totalDifference = singleDifference + totalDifference;
                
             }
-            console.log(totalDifference);
+            
 
             if (totalDifference < leastDifference) {
                 leastDifference = totalDifference;

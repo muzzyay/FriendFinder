@@ -244,7 +244,6 @@
             event.preventDefault();
 
             if (parseInt($("#q1").val()) === NaN || parseInt($("#q2").val()) === NaN || parseInt($("#q3").val()) === NaN || parseInt($("#q4").val()) === NaN || parseInt($("#q5").val()) === NaN || parseInt($("#q6").val()) === NaN || parseInt($("#q7").val()) === NaN || parseInt($("#q8").val()) === NaN || parseInt($("#q9").val()) === NaN || parseInt($("#q10").val()) === NaN || $("#form-name").val().trim().length < 3 || $("#form-image").val().trim().length < 5) {
-                // alert("Please make sure you answered all questions.");
 
                 $('#validate').modal();
             } else {
@@ -255,38 +254,29 @@
                     scores: []
 
                 }
-                // Number($("#q1").val()), Number($("#q2").val()), Number($("#q3").val()), Number($("#q4").val()), Number($("#q5").val()), Number($("#q6").val()), Number($("#q7").val()), Number($("#q8").val()), Number($("#q9").val()), Number($("#q10").val())
 
-                for(var i=1; i<11; i++){
-                    newFriend.scores.push(parseInt($("#q"+i).val()));
+
+                for (var i = 1; i < 11; i++) {
+                    newFriend.scores.push(parseInt($("#q" + i).val()));
                 }
                 console.log(newFriend);
 
                 $("#form-name").val("");
                 $("#form-image").val("");
-                $("#q1").val("Select an option");
-                $("#q2").val("Select an option");
-                $("#q3").val("Select an option");
-                $("#q4").val("Select an option");
-                $("#q5").val("Select an option");
-                $("#q6").val("Select an option");
-                $("#q7").val("Select an option");
-                $("#q8").val("Select an option");
-                $("#q9").val("Select an option");
-                $("#q10").val("Select an option");
-
+                for (var i = 1; i < 11; i++) {
+                    $("#q" + i).val("Select an option");
+                }
 
                 $.post("/api/friends", newFriend)
                     .then(function (data) {
                         $("#friendmatch-body").empty();
                         var img = $("<img>");
+                        img.attr("style", "height:200px;width:200px;");
                         img.attr("src", data.photo);
                         img.attr("alt", data.name);
                         $("#friendmatch-body").append(img);
                         $("#friendmatch-body").append("<h3>" + data.name + "</h3>");
                         $('#friendmatch').modal();
-
-
                     });
             }
 
