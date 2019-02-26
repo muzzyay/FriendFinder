@@ -242,8 +242,9 @@
 
         $("#submit-btn").on("click", function (event) {
             event.preventDefault();
+            console.log($("#q1").val());
 
-            if (parseInt($("#q1").val()) === NaN || parseInt($("#q2").val()) === NaN || parseInt($("#q3").val()) === NaN || parseInt($("#q4").val()) === NaN || parseInt($("#q5").val()) === NaN || parseInt($("#q6").val()) === NaN || parseInt($("#q7").val()) === NaN || parseInt($("#q8").val()) === NaN || parseInt($("#q9").val()) === NaN || parseInt($("#q10").val()) === NaN || $("#form-name").val().trim().length < 3 || $("#form-image").val().trim().length < 5) {
+            if ($("#q1").val() === null || $("#q2").val() === null || $("#q3").val() === null || $("#q4").val() === null || $("#q5").val() === null || $("#q6").val() === null || $("#q7").val() === null || $("#q8").val() === null || $("#q9").val() === null || $("#q10").val() === null || $("#form-name").val().trim().length < 3 || $("#form-image").val().trim().length < 5) {
 
                 $('#validate').modal();
             } else {
